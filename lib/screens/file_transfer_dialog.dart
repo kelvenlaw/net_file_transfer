@@ -29,7 +29,7 @@ class _FileTransferDialogState extends State<FileTransferDialog> {
   @override
   void initState() {
     super.initState();
-    _fileTransferClient = FileTransferClient(serverAddress: widget.deviceAddress, serverPort: widget.port);
+    // _fileTransferClient = FileTransferClient(serverAddress: widget.deviceAddress, serverPort: widget.port);
     _connectToDevice();
   }
 
@@ -108,10 +108,10 @@ class _FileTransferDialogState extends State<FileTransferDialog> {
   Future<void> sendFile(String filePath) async {
     //发送文件
     setState(() {
-      files.add(filePath!);
+      files.add(filePath);
       progress[filePath] = 0.0;
     });
-    await _fileTransferClient?.sendFile(filePath, widget.deviceAddress, (sentBytes, totalBytes) {
+    await _fileTransferClient?.sendFile(filePath, (sentBytes, totalBytes) {
       setState(() {
         progress[filePath] = sentBytes / totalBytes;
       });
